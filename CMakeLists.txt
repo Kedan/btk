@@ -29,25 +29,31 @@ FetchContent_Declare(
 FetchContent_MakeAvailable(googletest)
 enable_testing()
 
+add_subdirectory(${SUBMOD_DIR}/nlohmann)
 add_subdirectory(${SUBMOD_DIR}/nudny-arg-parser)
 add_subdirectory(${SUBMOD_DIR}/nudny-fio)
+
 
 add_executable(${MOD_NAME}
 	${SRC_DIR}/btk.cpp
 	${SRC_DIR}/main.cpp
 )
 
+target_include_directories(${MOD_NAME}
+	PUBLIC	
+	${SUBMOD_DIR}/nlohmann/${INC_DIR}
+	${SUBMOD_DIR}/nudny-arg-parser/${INC_DIR}
+	${SUBMOD_DIR}/nudny-fio/${INC_DIR}
+	${CMAKE_CURRENT_SOURCE_DIR}/${INC_DIR}
+)
+#target_link_libraries(${MOD_NAME}
+#	PUBLIC
+#	nlohmann_json::nlohmann_json
+#)
 target_link_libraries(${MOD_NAME}
 	PRIVATE
 	nudny::arg_parser
 	nudny::fio
-)
-
-target_include_directories(${MOD_NAME}
-	PUBLIC
-	${CMAKE_CURRENT_SOURCE_DIR}/${SUBMOD_DIR}/nudny-arg-parser
-	${CMAKE_CURRENT_SOURCE_DIR}/${SUBMOD_DIR}/nudny-fio
-	${CMAKE_CURRENT_SOURCE_DIR}/${INC_DIR}
 )
 option(RELEASE "Relese" OFF)
 if(RELEASE)
