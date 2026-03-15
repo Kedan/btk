@@ -30,6 +30,7 @@ FetchContent_MakeAvailable(googletest)
 enable_testing()
 
 add_subdirectory(${SUBMOD_DIR}/nudny-arg-parser)
+add_subdirectory(${SUBMOD_DIR}/nudny-fio)
 
 add_executable(${MOD_NAME}
 	${SRC_DIR}/btk.cpp
@@ -39,12 +40,13 @@ add_executable(${MOD_NAME}
 target_link_libraries(${MOD_NAME}
 	PRIVATE
 	nudny::arg_parser
+	nudny::fio
 )
 
 target_include_directories(${MOD_NAME}
 	PUBLIC
-	${CMAKE_CURRENT_SOURCE_DIR}/${SUBMOD_DIR}
 	${CMAKE_CURRENT_SOURCE_DIR}/${SUBMOD_DIR}/nudny-arg-parser
+	${CMAKE_CURRENT_SOURCE_DIR}/${SUBMOD_DIR}/nudny-fio
 	${CMAKE_CURRENT_SOURCE_DIR}/${INC_DIR}
 )
 option(RELEASE "Relese" OFF)
