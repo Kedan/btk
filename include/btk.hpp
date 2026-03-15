@@ -1,24 +1,31 @@
 #pragma once
 
 #include <iostream>
+#include <memory>
 #include <chrono>
 #include <vector>
 
 namespace btk {
 	
 	struct ReadingState {
-		static constexpr unsigned char NOT_READED{0x0};
-		static constexpr unsigned char READING{0x00000001};
-		static constexpr unsigned char READED{0x0000010};
-		static constexpr unsigned char PAUSED{0x00000100};
-	}
+		static constexpr unsigned int NOT_READED{0x0};
+		static constexpr unsigned int READING{0x00000001};
+		static constexpr unsigned int READED{0x0000010};
+		static constexpr unsigned int PAUSED{0x00000100};
+	};
 
 	class Person {
 		public:
 			std::string name;
 			std::string firstname;
 	};
-	
+
+	class Publisher {
+		public:
+			std::string fullname;
+			std::string name;
+	};
+
 	class Localization {
 		public:
 			std::string name;
@@ -36,13 +43,13 @@ namespace btk {
 	};
 	
 	struct BookFlags {
-		static constexpr unsigned short int IMPORTANT		{0x00000001}	
-		static constexpr unsigned short int FAVOURITE		{0x00000010}
-		static constexpr unsigned short int BORROWED		{0x00000100}
-		static constexpr unsigned short int READED			{0x00001000}
-		static constexpr unsigned short int READING			{0x00010000}
-		static constexpr unsigned short int CYCLE_COMPLETE	{0x00100000}
-		static constexpr unsigned short int MULTIPLE		{0x01000000}	
+		static constexpr unsigned int IMPORTANT		{0x00000001};	
+		static constexpr unsigned int FAVOURITE		{0x00000010};
+		static constexpr unsigned int BORROWED		{0x00000100};
+		static constexpr unsigned int READED			{0x00001000};
+		static constexpr unsigned int READING			{0x00010000};
+		static constexpr unsigned int CYCLE_COMPLETE	{0x00100000};
+		static constexpr unsigned int MULTIPLE		{0x01000000};	
 	};
 	
 	class EAN {
@@ -88,14 +95,14 @@ namespace btk {
 					, unsigned int t_pages
 					, unsigned int t_cover
 					, int yyyy
-					, int mm
-					, int dd
+					, unsigned int mm
+					, unsigned int dd
 					, float t_price
 			   		, unsigned short int t_flags ) 
 				: title{t_title}
 				, publicationDate{yearOfPublication}
 				, pages{t_pages}
-				, aquisitionDate{yyy,mm,dd}
+				, aquisitionDate{std::chrono::year{yyyy}, std::chrono::month{mm}, std::chrono::day{dd}}
 				, price{t_price}
 				, flags{t_flags} {
 

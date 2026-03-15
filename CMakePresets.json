@@ -1,0 +1,181 @@
+{
+	"version": 10,
+	"configurePresets": [
+		{
+			"name": "debug",
+			"generator": "Ninja",
+			"binaryDir": "build/debug",
+			"cacheVariables": {
+				"CMAKE_BUILD_TYPE": "Debug",
+				"ENABLE_SANITIZERS": "OFF",
+				"CMAKE_CXX_FLAGS_DEBUG": " -Wshadow -Wconversion -Werror -g -O0"
+			}
+		},
+		{
+			"name": "asan",
+			"generator": "Ninja",
+			"binaryDir": "build/asan",
+			"cacheVariables": {
+				"CMAKE_BUILD_TYPE": "Debug",
+				"ENABLE_SANITIZERS": "ON",
+				"CMAKE_CXX_FLAGS_DEBUG": " -Wshadow -Wconversion -Werror -g -O1"
+			}
+		},
+		{
+			"name": "release",
+			"generator": "Ninja",
+			"binaryDir": "build/release",
+			"cacheVariables": {
+				"CMAKE_BUILD_TYPE": "Release",
+				"ENABLE_SANITIZERS": "OFF"
+			}
+		},
+		{
+			"name": "valgrind",
+			"generator": "Ninja",
+			"binaryDir": "build/valgrind",
+			"cacheVariables": {
+				"CMAKE_BUILD_TYPE": "Debug",
+				"ENABLE_SANITIZERS": "OFF",
+				"CMAKE_CXX_FLAGS_DEBUG": " -Wshadow -Wconversion -Werror -g -O0"
+			}
+		},
+		{
+			"name": "helgrind",
+			"generator": "Ninja",
+			"binaryDir": "build/helgrind",
+			"cacheVariables": {
+				"CMAKE_BUILD_TYPE": "Debug",
+				"CMAKE_CXX_FLAGS_DEBUG": " -O0 -g -fno-omit-frame-pointer -pthread"
+			}
+		},
+		{
+			"name": "coverage",
+			"binaryDir": "build/coverage",
+			"generator":"Ninja",
+			"cacheVariables": {
+				"CMAKE_BUILD_TYPE": "Debug",
+				"ENABLE_COVERAGE": "ON"
+			}
+		}
+	],
+	"buildPresets": [
+		{
+			"name": "debug",
+			"configurePreset": "debug"
+		},
+		{
+			"name": "clean-debug",
+			"configurePreset": "debug",
+			"targets": ["clean"]
+		},
+		{
+			"name": "rebuild-debug",
+			"configurePreset": "debug",
+			"targets": ["clean", "all"]
+		},
+		{
+			"name": "asan",
+			"configurePreset": "asan"
+		},
+		{
+			"name": "clean-asan",
+			"configurePreset": "asan",
+			"targets": ["clean"] 
+		},
+		{
+			"name": "rebuild-asan",
+			"configurePreset": "asan",
+			"targets": ["clean","all"]
+		},
+		{
+			"name": "release",
+			"configurePreset": "release"
+		},
+		{
+			"name": "clean-release",
+			"configurePreset": "release",
+			"targets": ["clean"]
+		},
+		{
+			"name": "rebuild-release",
+			"configurePreset": "release",
+			"targets": ["clean", "all"]
+		},
+		{
+			"name": "valgrind",
+			"configurePreset": "valgrind"
+		},
+		{
+			"name": "clean-valgrind",
+			"configurePreset": "valgrind",
+			"targets": ["clean"]
+		},
+		{
+			"name": "rebuild-valgrind",
+			"configurePreset": "valgrind",
+			"targets": ["clean", "all"]
+		},
+		{
+			"name": "helgrind",
+			"configurePreset": "helgrind"
+		},
+		{
+			"name": "clean-helgrind",
+			"configurePreset": "helgrind",
+			"targets": ["clean"]
+		},
+		{
+			"name": "rebuild-helgrind",
+			"configurePreset": "helgrind",
+			"targets": ["clean", "all"]
+		},
+		{
+			"name": "coverage",
+			"configurePreset": "coverage"
+		},
+		{
+			"name": "clean-coverage",
+			"configurePreset": "coverage",
+			"targets": ["clean"]
+		},
+		{
+			"name": "rebuild-coverage",
+			"configurePreset": "coverage",
+			"targets": ["clean", "all"]
+		}
+
+	],
+	"testPresets": [
+		{
+			"name": "debug",
+			"configurePreset": "debug",
+			"output": {
+				"outputOnFailure": true
+			},
+			"execution":{
+				"noTestsAction": "error"
+			}
+		},
+		{
+			"name": "asan",
+			"configurePreset": "asan"
+		},
+		{
+			"name": "release",
+			"configurePreset": "release"
+		},
+		{
+			"name": "valgrind",
+			"configurePreset": "valgrind"
+		},
+		{
+			"name": "helgrind",
+			"configurePreset": "helgrind"
+		},
+		{
+			"name": "coverage",
+			"configurePreset": "coverage"
+		}
+	]
+}
