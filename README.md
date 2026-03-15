@@ -1,3 +1,3 @@
 # btk
 
-Biblioteka - book collection software. 
+Biblioteka - book collection app. 
