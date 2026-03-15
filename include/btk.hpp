@@ -5,6 +5,8 @@
 #include <chrono>
 #include <vector>
 
+#include <nudny/util/cli_parser.hpp>
+
 namespace btk {
 	
 	struct ReadingState {

@@ -1,0 +1,3 @@
+[submodule "submodule/nudny-arg-parser"]
+	path = submodule/nudny-arg-parser
+	url = https://github.com/Kedan/nudny-arg-parser.git

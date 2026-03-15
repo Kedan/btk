@@ -1,14 +1,12 @@
 cmake_minimum_required(VERSION 3.23)
 
-
-
 set(MOD_NAME "btk")
 set(MOD_DESC "biblioteka - book collection")
 
 set(TESTS_DIR "test")
 set(INC_DIR "include")
 set(SRC_DIR "src")
-
+set(SUBMOD_DIR "submodule")
 
 project(${MOD_NAME} VERSION 0.1.0 DESCRIPTION ${MOD_DESC})
 set(CMAKE_CXX_STANDARD 23)
@@ -17,7 +15,7 @@ set(CMAKE_CXX_FLAGS, " -Wall -Wextra -Wpedantic")
 
 
 set(SANITIZER_FLAGS, "")
-add_custom_target(coverage
+add_custom_target(${MOD_NAME}_coverage
 	COMMAND ${CMAKE_CTEST_COMMAND} -V --preset coverage
 	COMMAND ${CMAKE_SOURCE_DIR}/scripts/gencov.sh ${CMAKE_BINARY_DIR}
 	WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
@@ -30,13 +28,23 @@ FetchContent_Declare(
 )
 FetchContent_MakeAvailable(googletest)
 enable_testing()
+
+add_subdirectory(${SUBMOD_DIR}/nudny-arg-parser)
+
 add_executable(${MOD_NAME}
 	${SRC_DIR}/btk.cpp
 	${SRC_DIR}/main.cpp
 )
+
+target_link_libraries(${MOD_NAME}
+	PRIVATE
+	nudny::arg_parser
+)
+
 target_include_directories(${MOD_NAME}
 	PUBLIC
-	${CMAKE_CURRENT_SOURCE_DIR}/submodule
+	${CMAKE_CURRENT_SOURCE_DIR}/${SUBMOD_DIR}
+	${CMAKE_CURRENT_SOURCE_DIR}/${SUBMOD_DIR}/nudny-arg-parser
 	${CMAKE_CURRENT_SOURCE_DIR}/${INC_DIR}
 )
 option(RELEASE "Relese" OFF)
