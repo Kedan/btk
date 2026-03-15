@@ -35,6 +35,8 @@ add_subdirectory(${SUBMOD_DIR}/nudny-fio)
 
 
 add_executable(${MOD_NAME}
+	${SRC_DIR}/book.cpp
+	${SRC_DIR}/collection.cpp
 	${SRC_DIR}/btk.cpp
 	${SRC_DIR}/main.cpp
 )
