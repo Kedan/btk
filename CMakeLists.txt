@@ -30,6 +30,7 @@ FetchContent_MakeAvailable(googletest)
 enable_testing()
 
 add_subdirectory(${SUBMOD_DIR}/nlohmann)
+add_subdirectory(${SUBMOD_DIR}/nudny-util)
 add_subdirectory(${SUBMOD_DIR}/nudny-arg-parser)
 add_subdirectory(${SUBMOD_DIR}/nudny-fio)
 
@@ -44,6 +45,7 @@ add_executable(${MOD_NAME}
 target_include_directories(${MOD_NAME}
 	PUBLIC	
 	${SUBMOD_DIR}/nlohmann/${INC_DIR}
+	${SUBMOD_DIR}/nudny-util/${INC_DIR}
 	${SUBMOD_DIR}/nudny-arg-parser/${INC_DIR}
 	${SUBMOD_DIR}/nudny-fio/${INC_DIR}
 	${CMAKE_CURRENT_SOURCE_DIR}/${INC_DIR}
@@ -54,6 +56,7 @@ target_include_directories(${MOD_NAME}
 #)
 target_link_libraries(${MOD_NAME}
 	PRIVATE
+	nudny::util
 	nudny::arg_parser
 	nudny::fio
 )
