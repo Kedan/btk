@@ -31,9 +31,8 @@ enable_testing()
 
 add_subdirectory(${SUBMOD_DIR}/nlohmann)
 add_subdirectory(${SUBMOD_DIR}/nudny-util)
-add_subdirectory(${SUBMOD_DIR}/nudny-arg-parser)
 add_subdirectory(${SUBMOD_DIR}/nudny-fio)
-
+add_subdirectory(${SUBMOD_DIR}/nudny-arg-parser)
 
 add_executable(${MOD_NAME}
 	${SRC_DIR}/book.cpp
@@ -44,18 +43,16 @@ add_executable(${MOD_NAME}
 
 target_include_directories(${MOD_NAME}
 	PUBLIC	
-	${SUBMOD_DIR}/nlohmann/${INC_DIR}
-	${SUBMOD_DIR}/nudny-util/${INC_DIR}
-	${SUBMOD_DIR}/nudny-arg-parser/${INC_DIR}
-	${SUBMOD_DIR}/nudny-fio/${INC_DIR}
+	${SUBMOD_DIR}/nlohmann/include
+	${SUBMOD_DIR}/nudny-util/include
+	${SUBMOD_DIR}/nudny-arg-parser/include
+	${SUBMOD_DIR}/nudny-fio/include
 	${CMAKE_CURRENT_SOURCE_DIR}/${INC_DIR}
 )
-#target_link_libraries(${MOD_NAME}
-#	PUBLIC
-#	nlohmann_json::nlohmann_json
-#)
+
 target_link_libraries(${MOD_NAME}
-	PRIVATE
+	PUBLIC
+	nlohmann_json::nlohmann_json
 	nudny::util
 	nudny::arg_parser
 	nudny::fio
