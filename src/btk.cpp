@@ -14,7 +14,7 @@ namespace btk {
 		if(auto it = actions.find(cmd.cli(0)); it != actions.end()) {
 				it->second();
 		} else {
-			std::cout << "Unknown command\n";
+			std::cout << "Unknown command!\n";
 		}	
 	}	
 
